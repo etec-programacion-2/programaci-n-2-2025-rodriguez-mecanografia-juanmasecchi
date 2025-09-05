@@ -3,13 +3,28 @@
  */
 package org.example
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-}
+import java.util.Scanner
 
 fun main() {
-    println(App().greeting)
+    val reader = Scanner(System.`in`)
+    
+    print("Por favor, ingresa tu nombre: ")
+    val nombre = reader.nextLine().trim()
+    
+    if (nombre.isBlank()) {
+        println("Error: Debe ingresar un nombre válido.")
+        reader.close()
+        return
+    }
+    
+    val usuario = Usuario(nombre)
+    
+    // Simulamos que el usuario inicia 2 sesiones
+    usuario.iniciarNuevaSesion()
+    usuario.iniciarNuevaSesion()
+    
+    // Mostrar historial
+    usuario.mostrarHistorial()
+    
+    reader.close()
 }
