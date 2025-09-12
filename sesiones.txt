@@ -1,0 +1,10 @@
+Usuario: juan | ID Usuario: 1 | Sesion: 1 | Fecha: 2025-09-12 09:44
+Usuario: juanma | ID Usuario: 2 | Sesion: 2 | Fecha: 2025-09-12 09:53
+Usuario: mulet | ID Usuario: 3 | Sesion: 3 | Fecha: 2025-09-12 09:54
+Usuario: juanma | ID Usuario: 2 | Sesion: 4 | Fecha: 2025-09-12 09:54
+Usuario: juanma | ID Usuario: 2 | Sesion: 5 | Fecha: 2025-09-12 09:55
+Usuario: lauti | ID Usuario: 4 | Sesion: 6 | Fecha: 2025-09-12 10:01
+Usuario: juan | ID Usuario: 1 | Sesion: 7 | Fecha: 2025-09-12 10:03
+Usuario: juan | ID Usuario: 1 | Sesion: 8 | Fecha: 2025-09-12 10:13
+Usuario: lauti | ID Usuario: 4 | Sesion: 9 | Fecha: 2025-09-12 10:13
+Usuario: Facu | ID Usuario: 5 | Sesion: 10 | Fecha: 2025-09-12 10:17

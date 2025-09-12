@@ -3,13 +3,29 @@
  */
 package org.example
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-}
+import java.util.Scanner
 
 fun main() {
-    println(App().greeting)
+    val reader = Scanner(System.`in`)
+
+    print("Por favor, ingresa tu nombre: ")
+    val nombre = reader.nextLine().trim()
+
+    if (nombre.isBlank()) {
+        println("Error: Debe ingresar un nombre válido.")
+        reader.close()
+        return
+    }
+
+    val usuario = GestorArchivos.obtenerUsuario(nombre)
+
+    // Inicia nueva sesión y la guarda automáticamente
+    usuario.iniciarNuevaSesion()
+
+    println("✅ Sesión registrada correctamente.")
+    println("Revisa 'usuarios.txt' y 'sesiones.txt' para el historial.")
+
+    usuario.mostrarHistorial()
+
+    reader.close()
 }
