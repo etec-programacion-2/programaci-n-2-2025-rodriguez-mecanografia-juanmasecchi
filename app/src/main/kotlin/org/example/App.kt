@@ -7,24 +7,25 @@ import java.util.Scanner
 
 fun main() {
     val reader = Scanner(System.`in`)
-    
+
     print("Por favor, ingresa tu nombre: ")
     val nombre = reader.nextLine().trim()
-    
+
     if (nombre.isBlank()) {
         println("Error: Debe ingresar un nombre válido.")
         reader.close()
         return
     }
-    
-    val usuario = Usuario(nombre)
-    
-    // Simulamos que el usuario inicia 2 sesiones
+
+    val usuario = GestorArchivos.obtenerUsuario(nombre)
+
+    // Inicia nueva sesión y la guarda automáticamente
     usuario.iniciarNuevaSesion()
-    usuario.iniciarNuevaSesion()
-    
-    // Mostrar historial
+
+    println("✅ Sesión registrada correctamente.")
+    println("Revisa 'usuarios.txt' y 'sesiones.txt' para el historial.")
+
     usuario.mostrarHistorial()
-    
+
     reader.close()
 }

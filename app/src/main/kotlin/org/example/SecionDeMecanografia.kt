@@ -8,13 +8,10 @@ data class SesionDeMecanografia(
     val fecha: String
 ) {
     companion object {
-        private var contadorId: Int = 0  // Nombre más claro para evitar confusión
-
-        // Método para crear sesión automáticamente con id y fecha
         fun nuevaSesion(): SesionDeMecanografia {
-            contadorId++
+            val id = GestorArchivos.nuevaSesionId()
             val fecha = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
-            return SesionDeMecanografia(contadorId, fecha)
+            return SesionDeMecanografia(id, fecha)
         }
     }
 }
