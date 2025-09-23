@@ -28,4 +28,8 @@ fun main() {
     usuario.mostrarHistorial()
 
     reader.close()
+    val texto: Texto = Texto()
+    texto.mostrarTexto()
+    texto.cambiarTexto()
+    texto.mostrarTexto()
 }
