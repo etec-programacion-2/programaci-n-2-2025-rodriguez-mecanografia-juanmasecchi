@@ -16,3 +16,8 @@ Usuario: juan | ID Usuario: 1 | Sesion: 15 | Fecha: 2025-09-23 12:22
 Usuario: juan | ID Usuario: 1 | Sesion: 16 | Fecha: 2025-09-23 12:22
 Usuario: lauti | ID Usuario: 4 | Sesion: 17 | Fecha: 2025-09-23 12:23
 Usuario: juan | ID Usuario: 1 | Sesion: 18 | Fecha: 2025-09-23 12:25
+Usuario: juan | ID Usuario: 1 | Sesion: 19 | Fecha: 2025-09-23 13:06
+Usuario: lautaro | ID Usuario: 7 | Sesion: 20 | Fecha: 2025-09-26 09:59
+Usuario: juan | ID Usuario: 1 | Sesion: 21 | Fecha: 2025-09-26 10:02
+Usuario: juan | ID Usuario: 1 | Sesion: 22 | Fecha: 2025-09-26 10:06
+Usuario: juan | ID Usuario: 1 | Sesion: 23 | Fecha: 2025-09-26 10:09
