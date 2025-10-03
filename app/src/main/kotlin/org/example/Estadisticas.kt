@@ -6,7 +6,7 @@ class EstadisticasJuego {
 
     /**
      * Calcula las palabras por minuto (WPM)
-     * @param palabrasCorrectas NÃºmero de palabras escritas correctamente
+     * @param palabrasCorrectas Número de palabras escritas correctamente
      * @param tiempoEnSegundos Tiempo total de escritura en segundos
      * @return WPM calculado
      */
@@ -17,9 +17,9 @@ class EstadisticasJuego {
     }
 
     /**
-     * Calcula la precisiÃ³n basada en el estado de las palabras
+     * Calcula la precisión basada en el estado de las palabras
      * @param palabras Lista de palabras con su estado
-     * @return PrecisiÃ³n como porcentaje (0-100)
+     * @return Precisión como porcentaje (0-100)
      */
     fun calcularPrecision(palabras: List<Palabra>): Double {
         if (palabras.isEmpty()) return 0.0
@@ -29,7 +29,7 @@ class EstadisticasJuego {
     }
 
     /**
-     * EvalÃºa la respuesta del usuario comparÃ¡ndola palabra por palabra con el texto original
+     * Evalúa la respuesta del usuario comparándola palabra por palabra con el texto original
      * @param textoOriginal Lista de palabras del texto original
      * @param respuestaUsuario Texto escrito por el usuario
      * @return Lista de palabras con su estado evaluado
@@ -56,10 +56,10 @@ class EstadisticasJuego {
     }
 
     /**
-     * Genera un reporte completo de estadÃ­sticas
+     * Genera un reporte completo de estadísticas
      * @param palabrasEvaluadas Lista de palabras con su estado
      * @param tiempoEnSegundos Tiempo total de escritura
-     * @return Objeto ResultadoJuego con todas las estadÃ­sticas
+     * @return Objeto ResultadoJuego con todas las estadísticas
      */
     fun generarReporte(palabrasEvaluadas: List<Palabra>, tiempoEnSegundos: Long): ResultadoJuego {
         val precision = calcularPrecision(palabrasEvaluadas)
@@ -80,24 +80,28 @@ class EstadisticasJuego {
     }
 
     /**
-     * Muestra las palabras con colores segÃºn su estado (simulado con sÃ­mbolos)
+     * Muestra las palabras con símbolos según su estado
+     * ✅ = Palabra correcta (escrita exactamente como el original)
+     * ❌ = Palabra incorrecta (con errores de ortografía, mayúsculas o acentos)
+     * ⏳ = Palabra no escrita (el usuario no llegó a escribirla)
+     *
      * @param palabrasEvaluadas Lista de palabras evaluadas
      */
     fun mostrarPalabrasConEstado(palabrasEvaluadas: List<Palabra>) {
-        println("\nðŸ“ ANÃLISIS PALABRA por PALABRA:")
+        println("\n📝 ANÁLISIS PALABRA POR PALABRA:")
         println("=".repeat(50))
 
         var lineaActual = ""
         for (palabra in palabrasEvaluadas) {
             val simbolo = when (palabra.estado) {
-                EstadoPalabra.CORRECTA -> "âœ…"
-                EstadoPalabra.INCORRECTA -> "âŒ"
-                EstadoPalabra.PENDIENTE -> "â³"
+                EstadoPalabra.CORRECTA -> "✅"
+                EstadoPalabra.INCORRECTA -> "❌"
+                EstadoPalabra.PENDIENTE -> "⏳"
             }
 
             val palabraConSimbolo = "${palabra.texto}$simbolo"
 
-            // Control de lÃ­nea para no hacer lÃ­neas muy largas
+            // Control de línea para no hacer líneas muy largas
             if (lineaActual.length + palabraConSimbolo.length > 60) {
                 println(lineaActual.trim())
                 lineaActual = palabraConSimbolo + " "
@@ -106,13 +110,13 @@ class EstadisticasJuego {
             }
         }
 
-        // Imprimir la Ãºltima lÃ­nea
+        // Imprimir la última línea
         if (lineaActual.isNotEmpty()) {
             println(lineaActual.trim())
         }
 
-        println("\nðŸ“Š LEYENDA:")
-        println("âœ… = Correcta | âŒ = Incorrecta | â³ = No escrita")
+        println("\n📖 LEYENDA:")
+        println("✅ = Correcta | ❌ = Incorrecta | ⏳ = No escrita")
     }
 }
 
@@ -129,26 +133,26 @@ data class ResultadoJuego(
     val tiempoSegundos: Long
 ) {
     fun mostrarReporte() {
-        println("\nðŸ“Š REPORTE DE ESTADÃSTICAS")
+        println("\n📊 REPORTE DE ESTADÍSTICAS")
         println("=".repeat(40))
-        println("â±ï¸  Tiempo total: ${tiempoSegundos}s")
-        println("ðŸ“ Palabras totales: $totalPalabras")
-        println("âœ… Palabras correctas: $palabrasCorrectas")
-        println("âŒ Palabras incorrectas: $palabrasIncorrectas")
-        println("â³ Palabras no escritas: $palabrasPendientes")
-        println("ðŸŽ¯ PrecisiÃ³n: ${"%.1f".format(precision)}%")
-        println("âš¡ Velocidad: $wpm WPM")
+        println("⏱️  Tiempo total: ${tiempoSegundos}s")
+        println("📝 Palabras totales: $totalPalabras")
+        println("✅ Palabras correctas: $palabrasCorrectas")
+        println("❌ Palabras incorrectas: $palabrasIncorrectas")
+        println("⏳ Palabras no escritas: $palabrasPendientes")
+        println("🎯 Precisión: ${"%.1f".format(precision)}%")
+        println("⚡ Velocidad: $wpm WPM")
 
-        // ClasificaciÃ³n del rendimiento
+        // Clasificación del rendimiento
         val nivelRendimiento = when {
-            wpm >= 40 && precision >= 95 -> "ðŸ† Â¡EXCELENTE!"
-            wpm >= 30 && precision >= 90 -> "ðŸ¥‡ Â¡MUY BUENO!"
-            wpm >= 20 && precision >= 80 -> "ðŸ¥ˆ Â¡BUENO!"
-            wpm >= 10 && precision >= 70 -> "ðŸ¥‰ REGULAR"
-            else -> "ðŸ’ª Â¡SIGUE PRACTICANDO!"
+            wpm >= 40 && precision >= 95 -> "🏆 ¡EXCELENTE!"
+            wpm >= 30 && precision >= 90 -> "🥇 ¡MUY BUENO!"
+            wpm >= 20 && precision >= 80 -> "🥈 ¡BUENO!"
+            wpm >= 10 && precision >= 70 -> "🥉 REGULAR"
+            else -> "💪 ¡SIGUE PRACTICANDO!"
         }
 
-        println("ðŸ… Nivel: $nivelRendimiento")
+        println("🎖️ Nivel: $nivelRendimiento")
         println("=".repeat(40))
     }
 }
