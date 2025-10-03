@@ -21,3 +21,12 @@ Usuario: lautaro | ID Usuario: 7 | Sesion: 20 | Fecha: 2025-09-26 09:59
 Usuario: juan | ID Usuario: 1 | Sesion: 21 | Fecha: 2025-09-26 10:02
 Usuario: juan | ID Usuario: 1 | Sesion: 22 | Fecha: 2025-09-26 10:06
 Usuario: juan | ID Usuario: 1 | Sesion: 23 | Fecha: 2025-09-26 10:09
+Usuario: juan | ID Usuario: 1 | Sesion: 24 | Fecha: 2025-09-26 10:35
+Usuario: juan | ID Usuario: 1 | Sesion: 25 | Fecha: 2025-09-26 10:42
+Usuario: juan | ID Usuario: 1 | Sesion: 26 | Fecha: 2025-09-30 11:50
+Usuario: juan | ID Usuario: 1 | Sesion: 27 | Fecha: 2025-09-30 12:03
+Usuario: juan | ID Usuario: 1 | Sesion: 28 | Fecha: 2025-09-30 12:06
+Usuario: juan | ID Usuario: 1 | Sesion: 29 | Fecha: 2025-09-30 12:10
+Usuario: juan | ID Usuario: 1 | Sesion: 30 | Fecha: 2025-09-30 12:12
+Usuario: juan | ID Usuario: 1 | Sesion: 31 | Fecha: 2025-10-03 08:12
+Usuario: juan | ID Usuario: 1 | Sesion: 32 | Fecha: 2025-10-03 08:18

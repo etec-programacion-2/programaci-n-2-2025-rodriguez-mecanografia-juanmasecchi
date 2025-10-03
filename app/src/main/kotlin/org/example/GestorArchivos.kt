@@ -28,7 +28,7 @@ object GestorArchivos {
             }
         }
 
-        // Cargar último ID de sesión
+        // Cargar Ãºltimo ID de sesiÃ³n
         archivoSesiones.forEachLine { linea ->
             val partes = linea.split("|")
             if (partes.size >= 3) {
@@ -57,7 +57,7 @@ object GestorArchivos {
         archivoSesiones.appendText("Usuario: $nombre | ID Usuario: $idUsuario | Sesion: ${sesion.id} | Fecha: ${sesion.fecha}\n")
     }
 
-    // ✅ Nueva función para cargar sesiones de un usuario específico
+    // âœ… Nueva funciÃ³n para cargar sesiones de un usuario especÃ­fico
     fun cargarSesionesUsuario(idUsuario: Int): List<SesionDeMecanografia> {
         val sesiones = mutableListOf<SesionDeMecanografia>()
 
