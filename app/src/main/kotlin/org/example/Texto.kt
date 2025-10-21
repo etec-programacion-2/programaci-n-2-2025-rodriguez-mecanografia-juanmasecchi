@@ -37,7 +37,7 @@ class Texto {
             return
         }
 
-        println("ðŸ“– TEXTO A ESCRIBIR (${textoActual.size} palabras):")
+        println(" TEXTO A ESCRIBIR (${textoActual.size} palabras):")
         println("=".repeat(60))
 
         // Mostrar texto con formato mejorado (10 palabras por lÃ­nea)

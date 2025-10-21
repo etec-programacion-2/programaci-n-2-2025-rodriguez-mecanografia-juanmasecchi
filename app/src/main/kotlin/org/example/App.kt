@@ -3,8 +3,19 @@
  */
 package org.example
 
+import javax.swing.SwingUtilities
+import javax.swing.UIManager
+
 fun main() {
-    val juego = Juego()
-    juego.iniciar()
-    juego.cerrar()
+    // Configurar Look and Feel del sistema para mejor apariencia
+    try {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+
+    // Ejecutar la aplicación en el Event Dispatch Thread de Swing
+    SwingUtilities.invokeLater {
+        VentanaInicio().isVisible = true
+    }
 }
