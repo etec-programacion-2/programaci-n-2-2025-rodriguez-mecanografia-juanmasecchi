@@ -32,3 +32,9 @@ Usuario: juan | ID Usuario: 1 | Sesion: 31 | Fecha: 2025-10-03 08:12
 Usuario: juan | ID Usuario: 1 | Sesion: 32 | Fecha: 2025-10-03 08:18
 Usuario: cufa | ID Usuario: 8 | Sesion: 33 | Fecha: 2025-10-03 08:27
 Usuario: juan | ID Usuario: 1 | Sesion: 34 | Fecha: 2025-10-03 08:37
+Usuario: juan | ID Usuario: 1 | Sesion: 35 | Fecha: 2025-10-21 12:26
+Usuario: santi | ID Usuario: 9 | Sesion: 36 | Fecha: 2025-10-21 12:46
+Usuario: juan | ID Usuario: 1 | Sesion: 37 | Fecha: 2025-10-24 09:37
+Usuario: facu | ID Usuario: 10 | Sesion: 38 | Fecha: 2025-10-24 09:47
+Usuario: facu | ID Usuario: 10 | Sesion: 39 | Fecha: 2025-10-24 09:54
+Usuario: juan | ID Usuario: 1 | Sesion: 40 | Fecha: 2025-10-24 09:54
