@@ -11,14 +11,12 @@ class VentanaMenuPrincipal(private val usuario: Usuario) : JFrame() {
         defaultCloseOperation = EXIT_ON_CLOSE
         setSize(500, 400)
         setLocationRelativeTo(null)
-
         configurarUI()
     }
 
     private fun configurarUI() {
         layout = BorderLayout(10, 10)
 
-        // Panel superior con título
         val panelTitulo = JPanel().apply {
             background = Color(41, 128, 185)
             preferredSize = Dimension(0, 80)
@@ -29,7 +27,6 @@ class VentanaMenuPrincipal(private val usuario: Usuario) : JFrame() {
         }
         panelTitulo.add(lblTitulo)
 
-        // Panel de bienvenida
         val panelBienvenida = JPanel(FlowLayout(FlowLayout.CENTER)).apply {
             background = Color(236, 240, 241)
             preferredSize = Dimension(0, 50)
@@ -40,7 +37,6 @@ class VentanaMenuPrincipal(private val usuario: Usuario) : JFrame() {
         }
         panelBienvenida.add(lblBienvenida)
 
-        // Panel central con botones
         val panelCentral = JPanel(GridBagLayout()).apply {
             border = BorderFactory.createEmptyBorder(30, 50, 30, 50)
         }
@@ -101,10 +97,9 @@ class VentanaMenuPrincipal(private val usuario: Usuario) : JFrame() {
         add(panelBienvenida, BorderLayout.CENTER)
         add(panelCentral, BorderLayout.CENTER)
 
-        // Listeners
         btnPracticar.addActionListener {
             dispose()
-            VentanaPractica(usuario, texto).isVisible = true
+            VentanaPracticaModerna(usuario, texto).isVisible = true
         }
 
         btnCambiarTexto.addActionListener {
@@ -131,10 +126,7 @@ class VentanaMenuPrincipal(private val usuario: Usuario) : JFrame() {
             if (opcion == JOptionPane.YES_OPTION) {
                 JOptionPane.showMessageDialog(
                     this,
-                    "👋 ¡Gracias por jugar!\n" +
-                            "Tu progreso ha sido guardado.\n" +
-                            "📈 Recuerda: la práctica constante mejora tus habilidades\n" +
-                            "¡Vuelve pronto para seguir practicando! 🎯",
+                    "👋 ¡Gracias por jugar!\nTu progreso ha sido guardado.\n📈 ¡Vuelve pronto para seguir practicando! 🎯",
                     "Hasta Pronto",
                     JOptionPane.INFORMATION_MESSAGE
                 )
@@ -157,7 +149,6 @@ class VentanaMenuPrincipal(private val usuario: Usuario) : JFrame() {
             font = Font("Monospaced", Font.PLAIN, 12)
         }
 
-        // Obtener sesiones del usuario
         val sesiones = GestorArchivos.cargarSesionesUsuario(usuario.id)
 
         if (sesiones.isEmpty()) {
@@ -187,9 +178,7 @@ class VentanaMenuPrincipal(private val usuario: Usuario) : JFrame() {
             preferredSize = Dimension(100, 40)
         }
 
-        btnCerrar.addActionListener {
-            ventanaHistorial.dispose()
-        }
+        btnCerrar.addActionListener { ventanaHistorial.dispose() }
 
         val panelBoton = JPanel(FlowLayout(FlowLayout.CENTER))
         panelBoton.add(btnCerrar)
