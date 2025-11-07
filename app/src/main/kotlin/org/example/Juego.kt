@@ -30,7 +30,7 @@ class Juego {
         println("    🎮 JUEGO DE MECANOGRAFÍA 🎮")
         println("=".repeat(50))
         println("¡Bienvenido al juego de práctica de mecanografía!")
-        println("📝 Textos de 50 palabras")
+        println("📝 Textos de 40 palabras")
         println("📊 Estadísticas detalladas: WPM y precisión")
         println("🎯 ¡Mejora tu velocidad y precisión!")
         println()

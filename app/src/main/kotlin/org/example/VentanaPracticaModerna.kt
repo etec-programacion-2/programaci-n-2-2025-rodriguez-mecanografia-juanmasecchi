@@ -11,21 +11,25 @@ class VentanaPracticaModerna(
     private val texto: Texto
 ) : JFrame() {
 
-    private val panelTexto = JPanel(WrapLayout(FlowLayout.LEFT, 8, 8))
+    private val panelTexto = JPanel()
     private val lblVelocidad = JLabel("0")
-    private val lblPrecision = JLabel("0.0")
+    private val lblPrecision = JLabel("100")
 
     private var tiempoInicio: Long = 0
     private var haComenzado = false
     private val estadisticas = EstadisticasJuego()
-    private var textoUsuario = StringBuilder()
-    private val palabrasOriginales = texto.obtenerTextoActual()
-    private val lblsPalabras = mutableListOf<JLabel>()
 
-    private var palabrasCorrectas = 0
-    private var palabrasEvaluadasCount = 0
+    private val textoCompleto: String
+    private val lblsCaracteres = mutableListOf<JLabel>()
+    private var posicionActual = 0
+
+    private var caracteresCorrectos = 0
+    private var caracteresTotales = 0
 
     init {
+        // Unir todas las palabras en un texto completo con espacios
+        textoCompleto = texto.obtenerTextoActual().joinToString(" ")
+
         title = "Test de Mecanografía - ${usuario.nombre}"
         defaultCloseOperation = DO_NOTHING_ON_CLOSE
         setSize(1100, 750)
@@ -33,7 +37,7 @@ class VentanaPracticaModerna(
         contentPane.background = Color(250, 250, 250)
 
         configurarUI()
-        crearPalabrasTexto()
+        crearCaracteresTexto()
 
         addKeyListener(object : KeyAdapter() {
             override fun keyTyped(e: KeyEvent) {
@@ -70,11 +74,11 @@ class VentanaPracticaModerna(
         // Botón "Inténtalo de vuelta"
         val btnReintentar = JButton("Inténtalo de vuelta").apply {
             font = Font("Arial", Font.BOLD, 16)
-            foreground = Color(0, 150, 255)
+            foreground = Color(126, 87, 194)
             background = Color.WHITE
             isFocusPainted = false
             border = BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color(0, 150, 255), 2, true),
+                BorderFactory.createLineBorder(Color(126, 87, 194), 2, true),
                 EmptyBorder(12, 30, 12, 30)
             )
             cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)
@@ -87,8 +91,9 @@ class VentanaPracticaModerna(
         panelPrincipal.add(btnReintentar)
         panelPrincipal.add(Box.createRigidArea(Dimension(0, 50)))
 
-        // Panel del texto (sin scroll)
+        // Panel del texto con FlowLayout para que las letras fluyan naturalmente
         panelTexto.apply {
+            layout = FlowLayout(FlowLayout.LEFT, 0, 5)
             preferredSize = Dimension(900, 400)
             maximumSize = Dimension(900, 400)
             background = Color.WHITE
@@ -101,7 +106,7 @@ class VentanaPracticaModerna(
         panelPrincipal.add(panelTexto)
         panelPrincipal.add(Box.createRigidArea(Dimension(0, 20)))
 
-        val lblInstrucciones = JLabel("Presiona ESC para volver al menú").apply {
+        val lblInstrucciones = JLabel("Presiona ESC para volver al menú | Backspace para borrar").apply {
             font = Font("Arial", Font.PLAIN, 12)
             foreground = Color(150, 150, 150)
             alignmentX = Component.CENTER_ALIGNMENT
@@ -170,25 +175,30 @@ class VentanaPracticaModerna(
             return tarjeta
         }
 
-        val panelVel = crearTarjeta("Velocidad", Color(155, 89, 182), Color(120, 60, 150), "⚡", lblVelocidad, "PPM")
-        val panelPre = crearTarjeta("Precisión", Color(243, 156, 18), Color(200, 120, 10), "◎", lblPrecision, "%")
+        val panelVel = crearTarjeta("Velocidad", Color(126, 87, 194), Color(106, 27, 154), "⚡", lblVelocidad, "PPM")
+        val panelPre = crearTarjeta("Precisión", Color(255, 128, 0), Color(255, 110, 0), "◎", lblPrecision, "%")
 
         panel.add(panelVel)
         panel.add(panelPre)
         return panel
     }
 
-    private fun crearPalabrasTexto() {
+    private fun crearCaracteresTexto() {
         panelTexto.removeAll()
-        lblsPalabras.clear()
+        lblsCaracteres.clear()
 
-        for (palabra in palabrasOriginales) {
-            val lblPalabra = JLabel("$palabra ").apply {
-                font = Font("Arial", Font.PLAIN, 22)
+        for (caracter in textoCompleto) {
+            val lblCaracter = JLabel(caracter.toString()).apply {
+                font = Font("Monospaced", Font.BOLD, 24)
                 foreground = Color(180, 180, 180)
             }
-            lblsPalabras.add(lblPalabra)
-            panelTexto.add(lblPalabra)
+            lblsCaracteres.add(lblCaracter)
+            panelTexto.add(lblCaracter)
+        }
+
+        // Resaltar el primer carácter
+        if (lblsCaracteres.isNotEmpty()) {
+            lblsCaracteres[0].foreground = Color(100, 100, 100)
         }
 
         panelTexto.revalidate()
@@ -202,64 +212,93 @@ class VentanaPracticaModerna(
             iniciarActualizacionEstadisticas()
         }
 
-        if (c == ' ' || c == '\n') {
-            avanzarPalabra()
-        } else {
-            textoUsuario.append(c)
-            actualizarVisualizacion()
+        if (posicionActual >= textoCompleto.length) {
+            return // Ya terminó
         }
+
+        val caracterEsperado = textoCompleto[posicionActual]
+        caracteresTotales++
+
+        if (c == caracterEsperado) {
+            // Carácter correcto
+            lblsCaracteres[posicionActual].foreground = Color(46, 204, 113) // Verde
+            caracteresCorrectos++
+            posicionActual++
+
+            // Resaltar siguiente carácter
+            if (posicionActual < lblsCaracteres.size) {
+                lblsCaracteres[posicionActual].foreground = Color(100, 100, 100)
+            }
+
+            // Verificar si terminó
+            if (posicionActual >= textoCompleto.length) {
+                finalizarPractica()
+            }
+        } else {
+            // Carácter incorrecto
+            lblsCaracteres[posicionActual].foreground = Color(231, 76, 60) // Rojo
+        }
+
+        actualizarEstadisticas()
     }
 
     private fun borrarCaracter() {
-        if (textoUsuario.isNotEmpty()) {
-            textoUsuario.deleteCharAt(textoUsuario.length - 1)
-            actualizarVisualizacion()
-        }
-    }
+        if (posicionActual > 0) {
+            // Volver al carácter anterior
+            posicionActual--
 
-    private fun avanzarPalabra() {
-        if (palabrasEvaluadasCount < palabrasOriginales.size) {
-            val palabraOriginal = palabrasOriginales[palabrasEvaluadasCount]
-            val palabraEscrita = textoUsuario.toString()
+            // Restaurar color del carácter actual
+            lblsCaracteres[posicionActual].foreground = Color(100, 100, 100)
 
-            if (palabraEscrita == palabraOriginal) {
-                lblsPalabras[palabrasEvaluadasCount].foreground = Color(46, 204, 113)
-                palabrasCorrectas++
-            } else {
-                lblsPalabras[palabrasEvaluadasCount].foreground = Color(231, 76, 60)
+            // Si había un siguiente, quitarle el resaltado
+            if (posicionActual + 1 < lblsCaracteres.size) {
+                val siguienteColor = when (lblsCaracteres[posicionActual + 1].foreground) {
+                    Color(46, 204, 113) -> Color(46, 204, 113) // Verde se mantiene
+                    Color(231, 76, 60) -> Color(231, 76, 60) // Rojo se mantiene
+                    else -> Color(180, 180, 180) // Gris por defecto
+                }
+                lblsCaracteres[posicionActual + 1].foreground = siguienteColor
             }
 
-            palabrasEvaluadasCount++
-            textoUsuario.clear()
+            // Ajustar contador de caracteres totales
+            if (caracteresTotales > 0) {
+                caracteresTotales--
 
-            if (palabrasEvaluadasCount >= palabrasOriginales.size) finalizarPractica()
-        }
-    }
+                // Si el carácter que borramos estaba correcto, restar de correctos
+                if (lblsCaracteres[posicionActual].foreground == Color(46, 204, 113)) {
+                    caracteresCorrectos--
+                }
+            }
 
-    private fun actualizarVisualizacion() {
-        if (palabrasEvaluadasCount < palabrasOriginales.size) {
-            val palabraOriginal = palabrasOriginales[palabrasEvaluadasCount]
-            val palabraActual = textoUsuario.toString()
-            lblsPalabras[palabrasEvaluadasCount].foreground =
-                if (palabraOriginal.startsWith(palabraActual)) Color(100, 100, 100)
-                else Color(231, 76, 60)
+            actualizarEstadisticas()
         }
     }
 
     private fun iniciarActualizacionEstadisticas() {
-        val timer = Timer(100) { if (haComenzado) actualizarEstadisticas() }
+        val timer = Timer(100) {
+            if (haComenzado && posicionActual < textoCompleto.length) {
+                actualizarEstadisticas()
+            }
+        }
         timer.start()
     }
 
     private fun actualizarEstadisticas() {
         val tiempoTranscurrido = (System.currentTimeMillis() - tiempoInicio) / 1000
+
+        // Calcular PPM (palabras por minuto) basado en caracteres
+        // Aproximación: 5 caracteres = 1 palabra
         if (tiempoTranscurrido > 0) {
-            val wpm = estadisticas.calcularWPM(palabrasCorrectas, tiempoTranscurrido)
-            lblVelocidad.text = String.format("%.1f", wpm)
+            val palabrasEscritas = caracteresCorrectos / 5.0
+            val minutos = tiempoTranscurrido / 60.0
+            val ppm = if (minutos > 0) palabrasEscritas / minutos else 0.0
+            lblVelocidad.text = String.format("%.0f", ppm)
         }
-        if (palabrasEvaluadasCount > 0) {
-            val precision = (palabrasCorrectas.toDouble() / palabrasEvaluadasCount) * 100
-            lblPrecision.text = String.format("%.1f", precision)
+
+        // Calcular precisión
+        if (caracteresTotales > 0) {
+            val precision = (caracteresCorrectos.toDouble() / caracteresTotales) * 100
+            lblPrecision.text = String.format("%.0f", precision)
         }
     }
 
@@ -275,12 +314,12 @@ class VentanaPracticaModerna(
 
     private fun reiniciarPractica() {
         haComenzado = false
-        palabrasCorrectas = 0
-        palabrasEvaluadasCount = 0
-        textoUsuario.clear()
+        posicionActual = 0
+        caracteresCorrectos = 0
+        caracteresTotales = 0
         lblVelocidad.text = "0"
-        lblPrecision.text = "0.0"
-        crearPalabrasTexto()
+        lblPrecision.text = "100"
+        crearCaracteresTexto()
         requestFocusInWindow()
     }
 
@@ -292,44 +331,6 @@ class VentanaPracticaModerna(
         if (opcion == JOptionPane.YES_OPTION) {
             dispose()
             VentanaMenuPrincipal(usuario).isVisible = true
-        }
-    }
-}
-
-/**
- * Layout que acomoda las palabras y permite que se ajusten automáticamente
- * sin necesidad de barras de desplazamiento.
- */
-class WrapLayout(align: Int = FlowLayout.LEFT, hgap: Int = 5, vgap: Int = 5) : FlowLayout(align, hgap, vgap) {
-    override fun preferredLayoutSize(target: Container): Dimension {
-        return layoutSize(target)
-    }
-
-    private fun layoutSize(target: Container): Dimension {
-        synchronized(target.treeLock) {
-            val insets = target.insets
-            val maxWidth = target.parent?.width ?: 1000
-            var width = 0
-            var height = insets.top + insets.bottom + vgap * 2
-            var rowWidth = 0
-            var rowHeight = 0
-
-            for (component in target.components) {
-                if (component.isVisible) {
-                    val d = component.preferredSize
-                    if (rowWidth + d.width > maxWidth && rowWidth != 0) {
-                        width = maxOf(width, rowWidth)
-                        height += rowHeight + vgap
-                        rowWidth = 0
-                        rowHeight = 0
-                    }
-                    rowWidth += d.width + hgap
-                    rowHeight = maxOf(rowHeight, d.height)
-                }
-            }
-            width = maxOf(width, rowWidth)
-            height += rowHeight
-            return Dimension(width + insets.left + insets.right + hgap * 2, height)
         }
     }
 }

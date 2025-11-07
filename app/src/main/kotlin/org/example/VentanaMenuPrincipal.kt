@@ -50,7 +50,7 @@ class VentanaMenuPrincipal(private val usuario: Usuario) : JFrame() {
 
         val btnPracticar = JButton("🎯 Practicar mecanografía").apply {
             font = Font("Arial", Font.BOLD, 16)
-            background = Color(46, 204, 113)
+            background = Color(0, 128, 0)
             foreground = Color.WHITE
             preferredSize = Dimension(300, 50)
             isFocusPainted = false
@@ -59,7 +59,7 @@ class VentanaMenuPrincipal(private val usuario: Usuario) : JFrame() {
 
         val btnCambiarTexto = JButton("🔄 Cambiar texto").apply {
             font = Font("Arial", Font.BOLD, 16)
-            background = Color(52, 152, 219)
+            background = Color(255, 128, 0)
             foreground = Color.WHITE
             preferredSize = Dimension(300, 50)
             isFocusPainted = false
@@ -68,7 +68,7 @@ class VentanaMenuPrincipal(private val usuario: Usuario) : JFrame() {
 
         val btnHistorial = JButton("📊 Ver historial").apply {
             font = Font("Arial", Font.BOLD, 16)
-            background = Color(155, 89, 182)
+            background = Color(0, 0, 255)
             foreground = Color.WHITE
             preferredSize = Dimension(300, 50)
             isFocusPainted = false

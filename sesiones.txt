@@ -63,3 +63,14 @@ Usuario: emir | ID Usuario: 15 | Sesion: 62 | Fecha: 2025-11-04 12:02
 Usuario: gay+ | ID Usuario: 16 | Sesion: 63 | Fecha: 2025-11-04 12:03
 Usuario: emir | ID Usuario: 15 | Sesion: 64 | Fecha: 2025-11-04 12:04
 Usuario: juan | ID Usuario: 1 | Sesion: 65 | Fecha: 2025-11-04 12:24
+Usuario: juan | ID Usuario: 1 | Sesion: 66 | Fecha: 2025-11-04 12:41
+Usuario: juan | ID Usuario: 1 | Sesion: 67 | Fecha: 2025-11-04 12:47
+Usuario: juan | ID Usuario: 1 | Sesion: 68 | Fecha: 2025-11-04 12:51
+Usuario: A555 de Juan | ID Usuario: 17 | Sesion: 69 | Fecha: 2025-11-04 12:58
+Usuario: puta | ID Usuario: 18 | Sesion: 70 | Fecha: 2025-11-04 13:02
+Usuario: juan | ID Usuario: 1 | Sesion: 71 | Fecha: 2025-11-04 13:08
+Usuario: juan | ID Usuario: 1 | Sesion: 72 | Fecha: 2025-11-07 09:39
+Usuario: Burriker | ID Usuario: 19 | Sesion: 73 | Fecha: 2025-11-07 09:46
+Usuario: juan | ID Usuario: 1 | Sesion: 74 | Fecha: 2025-11-07 09:54
+Usuario: juan | ID Usuario: 1 | Sesion: 75 | Fecha: 2025-11-07 09:55
+Usuario: facu | ID Usuario: 10 | Sesion: 76 | Fecha: 2025-11-07 10:00
